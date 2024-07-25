@@ -10,7 +10,7 @@ local options = {
   relativenumber = true, -- Show relative line numbers
 
   -- Backup and swap files
-  swapfile = false, -- Disable swap file
+  swapfile = true, -- Disable swap file
   backup = false, -- Disable backup file
 
   -- Text wrapping and scrolling
