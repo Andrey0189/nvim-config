@@ -1,69 +1,82 @@
-local wk = require('which-key')
 local noarrows = true
 
-wk.register({
-  ['<leader>'] = {
-    l = { '<cmd>Lazy home<CR>', 'Open Lazy main menu' },
-    y = { '"*y', 'Yank to system clipboard' },
-    Y = { '"*Y', 'Yank line to system clipboard' },
-    s = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], 'Substitute word under cursor' },
-  },
+-- Leader keys
+vim.keymap.set('n', '<leader>l', '<cmd>Lazy home<CR>', { desc = 'Open Lazy main menu' })
+vim.keymap.set('n', '<leader>y', '"*y', { desc = 'Yank to system clipboard' })
+vim.keymap.set('n', '<leader>Y', '"*Y', { desc = 'Yank line to system clipboard' })
+vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Substitute word under cursor' })
 
-  ['<C-S-h>'] = { '<cmd>vertical resize +6<CR>', 'Resize window left' },
-  ['<C-S-j>'] = { '<cmd>resize +3<CR>', 'Resize window down' },
-  ['<C-S-k>'] = { '<cmd>resize -3<CR>', 'Resize window up' },
-  ['<C-S-l>'] = { '<cmd>vertical resize -6<CR>', 'Resize window right' },
+-- Buffer switching
+vim.keymap.set('n', 'gn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', 'gp', '<cmd>bprev<cr>', { desc = 'Previous buffer' })
+vim.keymap.set('n', 'gd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
 
-  J = { 'mzJ`z', 'Join line with next' },
+-- Improved J
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line with next' })
 
-  ['<C-d>'] = { '<C-d>zz', 'Scroll down and center' },
-  ['<C-u>'] = { '<C-u>zz', 'Scroll up and center' },
+-- Improved scrolling
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down and center' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up and center' })
 
-  n = { 'nzzzv', 'Next search result and center' },
-  N = { 'Nzzzv', 'Previous search result and center' },
+-- Improved next match
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result and center' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous search result and center' })
 
-  ['<C-Return>'] = { '$a<CR><Esc>', 'New line at end' },
-  ['<C-,>'] = { '$a,<Esc>', 'Comma at end' },
+-- Stuff for convenience
+vim.keymap.set('n', '<C-Return>', 'o<Esc>', { desc = 'New line at end' })
+vim.keymap.set('n', '<C-,>', 'A,<Esc>', { desc = 'Comma at end' })
+vim.keymap.set('n', '==', 'gg=G', { desc = 'Reindent file' })
 
-  ['=='] = { 'gg=G', 'Reindent file' },
+-- Window management remaps
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move to left window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move to below window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move to above window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move to right window' })
 
-  ['<C-h>'] = { '<C-w><C-h>', 'Move to left window' },
-  ['<C-j>'] = { '<C-w><C-j>', 'Move to below window' },
-  ['<C-k>'] = { '<C-w><C-k>', 'Move to above window' },
-  ['<C-l>'] = { '<C-w><C-l>', 'Move to right window' },
+vim.keymap.set('n', '<C-S-h>', '<cmd>vertical resize +6<CR>', { desc = 'Resize window left' })
+vim.keymap.set('n', '<C-S-j>', '<cmd>resize +3<CR>', { desc = 'Resize window down' })
+vim.keymap.set('n', '<C-S-k>', '<cmd>resize -3<CR>', { desc = 'Resize window up' })
+vim.keymap.set('n', '<C-S-l>', '<cmd>vertical resize -6<CR>', { desc = 'Resize window right' })
 
-}, { mode = 'n' })
+vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'Move line down' })
+vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { desc = 'Move line up' })
+vim.keymap.set('v', '<leader>y', '"*y', { desc = 'Yank to system clipboard' })
 
-wk.register({
-  ['J'] = { ':m \'>+1<CR>gv=gv', 'Move line down' },
-  ['K'] = { ':m \'<-2<CR>gv=gv', 'Move line up' },
-
-  ['<leader>y'] = { '"*y', 'Yank to system clipboard' },
-}, { mode = 'v' })
-
-wk.register({
-  ['jj'] = { '<Esc>', 'Escape insert mode' },
-  ['<Esc>'] = { '<Nop>', 'Get used to jj' }
-}, { mode = 'i' })
-
-wk.register({
-  ['<leader>p'] = { '"_dP', 'Paste and copy to void register' },
-}, { mode = 'x' })
-
+vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Escape insert mode' })
 
 if noarrows == true then
   local skillissue = function()
     print("skill issue?")
   end
 
-  local arrowRemap = {
-    ['<Up>'] = { skillissue, 'No arrow keys'},
-    ['<Down>'] = { skillissue, 'No arrow keys'},
-    ['<Left>'] = { skillissue, 'No arrow keys'},
-    ['<Right>'] = { skillissue, 'No arrow keys'},
-  }
-
-  wk.register(arrowRemap, { mode = 'n' })
-  wk.register(arrowRemap, { mode = 'v' })
-  wk.register(arrowRemap, { mode = 'i' })
+  vim.keymap.set('n', '<Up>', skillissue, { desc = 'No arrow keys'})
+  vim.keymap.set('n', '<Down>', skillissue, { desc = 'No arrow keys'})
+  vim.keymap.set('n', '<Left>', skillissue, { desc = 'No arrow keys'})
+  vim.keymap.set('n', '<Right>', skillissue, { desc = 'No arrow keys'})
 end
+
+function _G.run_code()
+  -- Save current file
+  vim.cmd('w')
+
+  -- Define the filetype
+  local filetype = vim.bo.filetype
+  local filename = vim.fn.expand('%')
+  local command
+
+  if filetype == 'python' then
+    command = 'python3 ' .. filename
+  elseif filetype == 'javascript' then
+    command = 'node ' .. filename
+  elseif filetype == 'c' then
+    local output = vim.fn.expand('%:r')  -- Filename without extension
+    command = 'gcc ' .. filename .. ' -o ' .. output .. ' && ./' .. output
+  else
+    print("Not configured")
+    return
+  end
+
+  vim.cmd('!' .. command)
+end
+
+vim.keymap.set('n', '<leader>r', run_code)

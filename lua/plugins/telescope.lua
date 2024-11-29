@@ -6,26 +6,18 @@ return {
 
   config = function()
     local builtin = require('telescope.builtin')
-    local wk = require('which-key')
     require('telescope').setup()
 
-    wk.register({
-      ['<leader>'] = {
-        f = {
-          name = '+file',
-          f = { builtin.find_files, 'find files' },
-          r = { builtin.oldfiles, 'open recent files' },
-          g = { builtin.git_files, 'find git files' },
-          c = { builtin.commands, 'find commands' },
-          w = { function()
-            local word = vim.fn.expand('<cword>')
-            builtin.grep_string({ search = word })
-          end, 'find word' },
-        },
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find files' })
+    vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'open recent files' })
+    vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'find git files' })
+    vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = 'find commands' })
+    vim.keymap.set('n', '<leader>fw', function()
+      local word = vim.fn.expand('<cword>')
+      builtin.grep_string({ search = word })
+    end, { desc = 'find word' })
 
-        ['vh'] = { builtin.help_tags, 'view help'}
-      },
-    })
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'view help' })
   end,
 }
 

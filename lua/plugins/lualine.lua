@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  enabled = false,
+  enabled = true,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require('lualine').setup {
@@ -9,7 +9,7 @@ return {
         icons_enabled = true,
         theme = 'gruvbox-material',
         component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
         -- Filetypes to disable lualine for.
         disabled_filetypes = {
           -- only ignores the ft for statusline.

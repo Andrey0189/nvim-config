@@ -7,10 +7,7 @@ return {
       direction = 'float',
       float_opts = {
         border = 'curved',
-        -- width = 130,
-        -- height = 30,
       },
-      shell = '/usr/bin/fish'
     })
   end
 }

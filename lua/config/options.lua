@@ -10,11 +10,11 @@ local options = {
   relativenumber = true, -- Show relative line numbers
 
   -- Backup and swap files
-  swapfile = true, -- Disable swap file
+  swapfile = false, -- Disable swap file
   backup = false, -- Disable backup file
 
   -- Text wrapping and scrolling
-  wrap = false, -- Disable line wrapping
+  wrap = true, -- Disable line wrapping
   smoothscroll = true, -- Enable smooth scrolling
   scrolloff = 8, -- Minimum number of screen lines to keep above and below the cursor
 
@@ -39,11 +39,14 @@ local options = {
 
   -- Visual settings
   termguicolors = true, -- Enable true color support
-  colorcolumn = '130', -- Highlight column 130
+  -- colorcolumn = '130', -- Highlight column 130
   cursorline = true, -- Highlight the current line
 
   -- Performance settings
   updatetime = 50, -- Faster completion (default is 4000ms)
+
+  -- For obsidian.nvim
+  cole = 2,
 }
 
 for option, value in pairs(options) do

@@ -4,3 +4,7 @@ return {
   event = 'VeryLazy',
   opts = {}
 }
+
+-- ys (you) add suround
+-- ds delete surround
+-- cs change surround
