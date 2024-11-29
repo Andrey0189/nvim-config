@@ -42,6 +42,31 @@ return {
     local lspkind = require('lspkind')
     local luasnip = require('luasnip')
 
+    local lspconfig = require('lspconfig')
+
+    local capabilities = vim.tbl_deep_extend(
+      'force',  -- Use 'force' to overwrite conflicting keys
+      {},  -- Start with an empty table
+      vim.lsp.protocol.make_client_capabilities(),  -- Default LSP client capabilities
+      cmp_nvim_lsp.default_capabilities()  -- Capabilities required for nvim-cmp
+    )
+
+    -- Don't look here
+    lspconfig.lua_ls.setup({
+      cmd = { "lua-language-server" },
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = { globals = { "vim" } },
+          telemetry = { enable = false },
+        },
+      },
+    })
+    lspconfig.nixd.setup({
+      cmd = { "nixd" },
+      capabilities = capabilities,
+    })
+
     -- Setup completion configuration for nvim-cmp
     cmp.setup({
       snippet = {
@@ -137,12 +162,6 @@ return {
 
     -- Create a capabilities table by deeply merging several tables
     -- This ensures that the LSP client capabilities are extended with nvim-cmp capabilities
-    local capabilities = vim.tbl_deep_extend(
-      'force',  -- Use 'force' to overwrite conflicting keys
-      {},  -- Start with an empty table
-      vim.lsp.protocol.make_client_capabilities(),  -- Default LSP client capabilities
-      cmp_nvim_lsp.default_capabilities()  -- Capabilities required for nvim-cmp
-    )
 
 
     vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, { desc = "Go to definition" })
