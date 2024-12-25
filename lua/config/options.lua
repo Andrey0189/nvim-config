@@ -14,7 +14,7 @@ local options = {
   backup = false, -- Disable backup file
 
   -- Text wrapping and scrolling
-  wrap = true, -- Disable line wrapping
+  wrap = false, -- Disable line wrapping
   smoothscroll = true, -- Enable smooth scrolling
   scrolloff = 8, -- Minimum number of screen lines to keep above and below the cursor
 

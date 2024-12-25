@@ -4,6 +4,15 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'source <afile>'
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.keymap.set('n', 'k', 'gk', { desc = 'Go up one line even if it is wrapped' })
+    vim.keymap.set('n', 'j', 'gj', { desc = 'Go down one line even if it is wrapped' })
+  end,
+})
+
 -- Trim trailing white spaces on save
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*',
