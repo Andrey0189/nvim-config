@@ -2,9 +2,11 @@ local noarrows = true
 
 -- Leader keys
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy home<CR>', { desc = 'Open Lazy main menu' })
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete to the void register' })
 vim.keymap.set('n', '<leader>y', '"*y', { desc = 'Yank to system clipboard' })
 vim.keymap.set('n', '<leader>Y', '"*Y', { desc = 'Yank line to system clipboard' })
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Substitute word under cursor' })
+vim.keymap.set('n', '<leader>o', 'o<esc>kO<Esc>j', { desc = 'Add empty lines' })
 
 -- Buffer switching
 vim.keymap.set('n', 'gn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
@@ -54,29 +56,3 @@ if noarrows == true then
   vim.keymap.set('n', '<Left>', skillissue, { desc = 'No arrow keys'})
   vim.keymap.set('n', '<Right>', skillissue, { desc = 'No arrow keys'})
 end
-
-function _G.run_code()
-  -- Save current file
-  vim.cmd('w')
-
-  -- Define the filetype
-  local filetype = vim.bo.filetype
-  local filename = vim.fn.expand('%')
-  local command
-
-  if filetype == 'python' then
-    command = 'python3 ' .. filename
-  elseif filetype == 'javascript' then
-    command = 'node ' .. filename
-  elseif filetype == 'c' then
-    local output = vim.fn.expand('%:r')  -- Filename without extension
-    command = 'gcc ' .. filename .. ' -o ' .. output .. ' && ./' .. output
-  else
-    print("Not configured")
-    return
-  end
-
-  vim.cmd('!' .. command)
-end
-
-vim.keymap.set('n', '<leader>r', run_code)
