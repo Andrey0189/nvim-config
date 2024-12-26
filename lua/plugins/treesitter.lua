@@ -9,6 +9,9 @@ return {
       { "<bs>", desc = "Decrement Selection", mode = "x" },
     },
     config = function()
+      vim.filetype.add({
+        pattern = { [".*/hypr/.*%.conf"] = "hyprlang" }
+      })
       require('nvim-treesitter.configs').setup({
         ensure_installed = {
           'c',
@@ -26,7 +29,7 @@ return {
           enable = true,
           -- disable highlighting for large files
           disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
+            local max_filesize = 100 * 1024 -- 100 kb
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             if ok and stats and stats.size > max_filesize then
               return true
@@ -41,8 +44,8 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
+            init_selection = "<c-space>",
+            node_incremental = "<c-space>",
             scope_incremental = false,
             node_decremental = "<bs>",
           },
