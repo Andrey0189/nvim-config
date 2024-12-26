@@ -51,7 +51,6 @@ return {
       cmp_nvim_lsp.default_capabilities()  -- Capabilities required for nvim-cmp
     )
 
-    -- Don't look here
     lspconfig.lua_ls.setup({
       cmd = { "lua-language-server" },
       capabilities = capabilities,
@@ -62,9 +61,23 @@ return {
         },
       },
     })
+
     lspconfig.nixd.setup({
       cmd = { "nixd" },
       capabilities = capabilities,
+    })
+
+    lspconfig.pylsp.setup({
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = {
+              ignore = {'W391'},
+              maxLineLength = 100
+            }
+          }
+        }
+      }
     })
 
     -- Setup completion configuration for nvim-cmp
