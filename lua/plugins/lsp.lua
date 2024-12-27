@@ -68,6 +68,7 @@ return {
     })
 
     lspconfig.pylsp.setup({
+      capabilities = capabilities,
       settings = {
         pylsp = {
           plugins = {
