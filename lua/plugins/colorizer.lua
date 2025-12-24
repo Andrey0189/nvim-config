@@ -1,14 +1,5 @@
 return {
   'norcalli/nvim-colorizer.lua',
-  -- config = function()
-  --   require('colorizer').setup({
-  --     '*';
-  --     user_default_options = {
-  --       names = false,
-  --       mode = 'foreground'
-  --     }
-  --   })
-  -- end
   opts = {
     '*';
     user_default_options = {

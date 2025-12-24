@@ -1,9 +1,12 @@
 -- Autosource for config files
 vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = vim.fn.glob('~/.config/nvim/**/*.lua', true, true),
-  command = 'source <afile>'
+  pattern = vim.fn.stdpath('config') .. '/**/*.lua',
+  callback = function()
+    vim.cmd('source %')
+  end,
 })
 
+-- Enable wrap for *.md + smart kj
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()

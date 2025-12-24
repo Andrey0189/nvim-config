@@ -1,71 +1,45 @@
 return {
   'nvim-lualine/lualine.nvim',
-  enabled = true,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    require('lualine').setup {
+    require('lualine').setup({
       options = {
-        -- fmt = string.lower,
-        icons_enabled = true,
         theme = 'gruvbox-material',
-        component_separators = { left = '', right = ''},
-        section_separators = { left = '', right = ''},
-        -- Filetypes to disable lualine for.
-        disabled_filetypes = {
-          -- only ignores the ft for statusline.
-          statusline = {},
-          -- only ignores the ft for winbar.
-          winbar = {},
-        },
-        -- make statusline inactive for following data types
-        ignore_focus = {},
-        -- a b c won't take the entire statusline
-        always_divide_middle = true,
-        -- if set to false every widnow will have its own statusnbar
+        -- Use separators for a cleaner look
+        component_separators = { left = '|', right = '|' },
+        section_separators = { left = '', right = '' },
         globalstatus = true,
-        -- refresh time in ms
-        refresh = {
-          statusline = 1000,
-          tabline = 1000,
-          winbar = 1000,
-        }
+        disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'neo-tree' } },
       },
       sections = {
-        lualine_a = {
-          { 'mode',
-            -- component specific options
-            -- icons_enabled = true, -- Enables the display of icons alongside the component.
-            -- icon = nil,
-            -- custom separators for component
-            -- separator = { left = '', right = ''}
-          }
-        },
+        lualine_a = { { 'mode', right_padding = 2 } },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        -- Date
-        -- lualine_c = { "os.date('%a')", 'data', "require'lsp-status'.status()" },
-        lualine_c = {
+        lualine_c = { { 'filename', path = 1 } }, -- path = 1 shows relative path
+        lualine_x = {
           {
-            -- 'buffers',
-            'filename',
-          }
+            -- Function to show active LSP server name
+            function()
+              local buf_ft = vim.api.nvim_get_current_buf_option(0, 'filetype')
+              local clients = vim.lsp.get_active_clients()
+              if next(clients) == nil then
+                return 'No LSP'
+              end
+              for _, client in ipairs(clients) do
+                local filetypes = client.config.filetypes
+                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                  return client.name
+                end
+              end
+              return 'No LSP'
+            end,
+            icon = ' ',
+            color = { fg = '#ffffff', gui = 'bold' },
+          },
+          'filetype',
         },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        lualine_z = { 'location' },
       },
-      -- I have no idea what it is needed for
-      -- inactive_sections = {
-      --   lualine_a = {},
-      --   lualine_b = {},
-      --   lualine_c = {'filename'},
-      --   lualine_x = {'location'},
-      --   lualine_y = {},
-      --   lualine_z = {}
-      -- },
-      tabline = {},
-      winbar = {},
-      inactive_winbar = {},
-      extensions = {}
-    }
-  end
+    })
+  end,
 }

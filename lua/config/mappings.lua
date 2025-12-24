@@ -3,9 +3,8 @@ local noarrows = true
 -- Leader keys
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy home<CR>', { desc = 'Open Lazy main menu' })
 vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete to the void register' })
-vim.keymap.set('n', '<leader>y', '"*y', { desc = 'Yank to system clipboard' })
-vim.keymap.set('n', '<leader>Y', '"*Y', { desc = 'Yank line to system clipboard' })
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Substitute word under cursor' })
+vim.keymap.set('n', '<leader>cs', '<cmd>nohlsearch<CR>', { desc = 'Substitute word under cursor' })
 vim.keymap.set('n', '<leader>o', 'o<esc>kO<Esc>j', { desc = 'Add empty lines' })
 
 -- Buffer switching
@@ -40,10 +39,12 @@ vim.keymap.set('n', '<C-S-j>', '<cmd>resize +3<CR>', { desc = 'Resize window dow
 vim.keymap.set('n', '<C-S-k>', '<cmd>resize -3<CR>', { desc = 'Resize window up' })
 vim.keymap.set('n', '<C-S-l>', '<cmd>vertical resize -6<CR>', { desc = 'Resize window right' })
 
+-- Visual mode stuff
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'Move line down' })
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { desc = 'Move line up' })
-vim.keymap.set('v', '<leader>y', '"*y', { desc = 'Yank to system clipboard' })
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete to the void register' })
 
+-- Quick insert mode leaving
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Escape insert mode' })
 
 if noarrows == true then
