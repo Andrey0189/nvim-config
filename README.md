@@ -1,8 +1,8 @@
 # 🌌 Ampersand's Neovim Configuration (2025 Edition)
 
-Welcome to my personal Neovim setup. This configuration is built for speed, aesthetics, and professional development across multiple languages. Powered by **Lazy.nvim**, it features a modular structure, advanced LSP capabilities, and a refined user experience.
+![Screenshot](./screenshot.png)
 
----
+Welcome to my personal Neovim setup. This configuration is built for speed, aesthetics, and professional development across multiple languages. Powered by **Lazy.nvim**, it features a modular structure, advanced LSP capabilities, and a refined user experience.
 
 ## 🛠️ Core Mappings
 
@@ -23,8 +23,6 @@ Defined in `lua/config/mappings.lua`, these are the global shortcuts that drive 
 | `==` | Re-indent entire file | Normal |
 | `<C-h/j/k/l>` | Navigate between windows | Normal |
 | `jj` | Quick escape to Normal mode | Insert |
-
----
 
 ## 🧩 Featured Plugins
 
@@ -81,19 +79,13 @@ Defined in `lua/config/mappings.lua`, these are the global shortcuts that drive 
 | | `cs{old}{new}` | Change surrounding |
 | **Comment** | `gcc` / `gc` | Toggle line / motion comment |
 
----
-
 ## 🎨 Visuals
 *   **Gruvbox Material**: A warm, high-contrast theme for long coding sessions.
 *   **Lualine**: A professional statusline showing active LSP, git branch, and path.
 *   **Dashboard**: A clean start screen for quick project access.
 *   **Colorizer**: Real-time preview of CSS/Hex colors in your code.
 
----
-
 ## 🎮 Extras
 *   **Vim-Be-Good**: Integrated game to practice your Vim motions. Type `:VimBeGood` to play.
-
----
 
 > *Note: Some plugins like `autopairs` and `vimwiki` are currently disabled. Check `lua/plugins/*.lua` to enable them.*
